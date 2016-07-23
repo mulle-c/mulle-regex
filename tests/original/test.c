@@ -13,7 +13,7 @@
  */
 
 #include <stdio.h>
-#include <mulle_standalone_regex/mulle_standalone_regex.h>
+#include <mulle_regex/mulle_regex.h>
 #include <mulle_regex/mulle_utf32regex+private.h>
 #include <mulle_utf/mulle_utf.h>
 

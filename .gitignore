@@ -9,3 +9,7 @@ xcuserdata/
 *~.*
 project.xcworkspace/
 tmp/
+mulle-tests/
+/include
+/lib
+/old
