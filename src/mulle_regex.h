@@ -7,7 +7,7 @@
 //
 
 #ifndef mulle_regex_h__
-#define mulle_regex_h__ 
+#define mulle_regex_h__
 
 #define MULLE_REGEX_VERSION  ((0 << 20) | (0 << 8) | 0)
 
