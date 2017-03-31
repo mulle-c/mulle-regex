@@ -10,7 +10,7 @@
 #include <mulle_utf/mulle_utf.h>
 #include <stdlib.h>
 
- 
+
 struct mulle_utf32regex;
 
 struct mulle_utf32range
@@ -56,7 +56,7 @@ mulle_utf32_t   *mulle_utf32_match( mulle_utf32_t *pattern, mulle_utf32_t *src);
 mulle_utf32_t   *mulle_utf32_substitute( mulle_utf32_t *pattern,
                                          mulle_utf32_t *replacement,
                                          mulle_utf32_t *src);
-                                       
+
 size_t   mulle_utf32regex_substitution_buffer_size( struct mulle_utf32regex *regex, mulle_utf32_t *replacement);
 
 struct mulle_utf32range   mulle_utf32regex_range_for_index( struct mulle_utf32regex *regex, unsigned int i);

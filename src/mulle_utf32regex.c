@@ -1,5 +1,5 @@
 /*
- * mulle_unicode_regex_compile and mulle_unicode_regex_execute -- 
+ * mulle_unicode_regex_compile and mulle_unicode_regex_execute --
  * mulle_unicode_regex_substitute is elsewhere
  */
 #include "mulle_utf32regex.h"
@@ -16,8 +16,8 @@
 #include <string.h>
 
 /* (nat) to unconfuse/confuse the code, the "program space" is pointed
- *       by a unknown pointer called node. This should make arithmetic harder, 
- *       which is good, because it catches more errors. Also inside the code, 
+ *       by a unknown pointer called node. This should make arithmetic harder,
+ *       which is good, because it catches more errors. Also inside the code,
  *       it is clearer what is a real "char", "mulle_utf32_t" or just amorphous buffer
  *       space
  */
@@ -36,10 +36,10 @@ typedef struct _anonymous_node   node;
  * Regstart and reganch permit very fast decisions on suitable starting points
  * for a match, cutting down the work a lot.  Regmust permits fast rejection
  * of lines that cannot possibly match.  The regmust tests are costly enough
- * that mulle_unicode_regex_compile() supplies a regmust only if the r.e. contains 
- * something  * potentially expensive (at present, the only such thing detected 
- * is * or + at the start of the r.e., which can involve a lot of backup).  
- * Regmlen is  * supplied because the test in mulle_unicode_regex_execute() needs 
+ * that mulle_unicode_regex_compile() supplies a regmust only if the r.e. contains
+ * something  * potentially expensive (at present, the only such thing detected
+ * is * or + at the start of the r.e., which can involve a lot of backup).
+ * Regmlen is  * supplied because the test in mulle_unicode_regex_execute() needs
  * it and mulle_unicode_regex_compile() is computing it anyway.
  */
 
@@ -119,7 +119,7 @@ static inline unsigned int   NEXT_NODE_OFFSET( node *p)
 {
    unsigned char   *q;
    unsigned int    offset;
-   
+
    q      = (unsigned char *) p;
    offset = ((unsigned int) q[ 3] << 16) + ((unsigned int) q[ 2] << 8) + q[ 1];
    assert( (int) offset >= 0);
@@ -202,16 +202,16 @@ mulle_utf32_t   *mulle_utf32_match( mulle_utf32_t *pattern, mulle_utf32_t *s)
 {
    regexp    *p;
    mulle_utf32_t   *found;
-   
+
    p = mulle_utf32regex_compile( pattern);
    if( ! p)
       return( NULL);
-      
+
    found = NULL;
    if( mulle_utf32regex_execute( p, s) > 0)
       found = p->startp[ 0];
    mulle_utf32regex_free( p);
-   
+
    return( found);
 }
 
@@ -224,17 +224,17 @@ mulle_utf32_t   *mulle_utf32_substitute( mulle_utf32_t *pattern,
    mulle_utf32_t   *buf;
    size_t          len;
    int             rval;
-   
+
    p = mulle_utf32regex_compile( pattern);
    if( ! p)
       return( NULL);
-      
+
    if( mulle_utf32regex_execute( p, s) <= 0)
    {
       mulle_utf32regex_free( p);
       return( NULL);
    }
-   
+
    /* figure out, how much space is needed */
 
    buf  = NULL;
@@ -247,13 +247,13 @@ mulle_utf32_t   *mulle_utf32_substitute( mulle_utf32_t *pattern,
          rval = mulle_utf32regex_substitute( p, replacement, buf, len);
    }
    mulle_utf32regex_free( p);
-   
+
    if( rval)
    {
       free( buf);
       buf = NULL;
    }
-   
+
    return( buf);
 }
 
@@ -262,7 +262,7 @@ struct mulle_utf32range   mulle_utf32regex_range_for_index( struct mulle_utf32re
 {
    struct mulle_utf32range   range;
    regexp                    *p;
-   
+
    p = rp;
    if( i >= NSUBEXP || ! p->startp[ i])
    {
@@ -270,8 +270,8 @@ struct mulle_utf32range   mulle_utf32regex_range_for_index( struct mulle_utf32re
       range.length   = 0;
       return( range);
    }
-   
-   range.length   = p->endp[ i] - p->startp[ i]; 
+
+   range.length   = p->endp[ i] - p->startp[ i];
    range.location = p->startp[ i] - p->start;
    return( range);
 }
@@ -311,7 +311,7 @@ struct mulle_utf32regex   *mulle_utf32regex_compile( mulle_utf32_t *exp)
 
    if( (errno = setjmp( co.bail)))
       return( NULL);
-      
+
    regex_c( &co, MAGIC);
    regex_generic( &co, 0, &flags);
 
@@ -325,7 +325,7 @@ struct mulle_utf32regex   *mulle_utf32regex_compile( mulle_utf32_t *exp)
       FAIL_COMPILE( &co, ENOMEM, "out of memory on your nintendo ds");
 #ifndef NDEBUG
    memset( r, 0xFA, sizeof( regexp) + (size_t) co.regsize);
-#endif   
+#endif
    /* Second pass: emit code. */
    co.regparse = (mulle_utf32_t *) exp;
    co.regnpar  = 1;
@@ -448,12 +448,12 @@ static node   *regex_generic( struct comp *co, int paren, int *flagp)     /* Par
       regex_set_tail_if_needed(co, br, ender);
 
    /* Check for proper termination. */
-   if( paren && *co->regparse++ != ')') 
+   if( paren && *co->regparse++ != ')')
    {
       FAIL_COMPILE( co, EINVAL, "unterminated ()");
-   } 
-   else 
-      if (!paren && *co->regparse != '\0') 
+   }
+   else
+      if (!paren && *co->regparse != '\0')
       {
          if (*co->regparse == ')')
             FAIL_COMPILE( co, EINVAL, "unmatched ()");
@@ -592,26 +592,26 @@ static size_t   mulle_utf32_metacspn( mulle_utf32_t *s1)
 {
    mulle_utf32_t  c;
    size_t   len;
-   
+
    len = 0;
    while( (c = *s1++))
    {
       switch( c)  /* #define  META     "^$.[()|?+*\\" */
       {
-      case '^'  :    
-      case '$'  : 
-      case '.'  : 
-      case '['  : 
-      case '('  : 
-      case ')'  : 
-      case '|'  : 
-      case '?'  : 
-      case '+'  : 
-      case '*'  : 
+      case '^'  :
+      case '$'  :
+      case '.'  :
+      case '['  :
+      case '('  :
+      case ')'  :
+      case '|'  :
+      case '?'  :
+      case '+'  :
+      case '*'  :
       case '\\' : return( len);
       }
       ++len;
-   }   
+   }
    return( len);
 }
 
@@ -628,30 +628,30 @@ static node   *regex_atom( struct comp *co, int *flagp)
 {
    node   *ret;
    int         flags;
-   
+
    *flagp = WORST;      /* Tentatively. */
-   
+
    switch( *co->regparse++)
    {
       case '^':
          ret = regex_node(co, BOL);
          break;
-         
+
       case '$':
          ret = regex_node(co, EOL);
          break;
-         
+
       case '.':
          ret     = regex_node(co, ANY);
          *flagp |= HASWIDTH | SIMPLE;
          break;
-         
+
       case '[':
       {
          int   range;
          int   rangeend;
          int   c;
-         
+
          if( *co->regparse == '^')     /* Complement of range. */
          {
             ret = regex_node(co, ANYBUT);
@@ -659,104 +659,104 @@ static node   *regex_atom( struct comp *co, int *flagp)
          }
          else
             ret = regex_node(co, ANYOF);
-         
+
          if( ((c = *co->regparse) == ']') || (c == '-'))
          {
             regex_c(co, c);
             co->regparse++;
          }
-         
+
          while( (c = *co->regparse++) && c != ']')
          {
             if( c != '-')
                regex_c(co, c);
-            else 
+            else
                if( ((c = *co->regparse) == ']') || (c == '\0'))
                   regex_c(co, '-');
                else
                {
                   range    = (unsigned char) *(co->regparse - 2);
                   rangeend = (unsigned char) c;
-                  
+
                   if( range > rangeend)
                      FAIL_COMPILE( co, EINVAL, "invalid [] range");
-                  
+
                   for( range++; range <= rangeend; range++)
                      regex_c(co, range);
-                  
+
                   co->regparse++;
                }
          }
-         
+
          regex_c( co, '\0');
-         
+
          if( c != ']')
             FAIL_COMPILE( co, EINVAL, "unmatched []");
-         
+
          *flagp |= HASWIDTH | SIMPLE;
          break;
       }
-         
+
       case '(':
          ret = regex_generic( co, 1, &flags);
          *flagp |= flags & (HASWIDTH | SPSTART);
          break;
-         
+
       case '\0':
       case '|':
       case ')':
          /* supposed to be caught earlier */
          FAIL_COMPILE( co, EDEADLK, "internal error: \\0|) unexpected");
          break;
-         
+
       case '?':
       case '+':
       case '*':
          FAIL_COMPILE( co, EINVAL, "?+* follows nothing");
          break;
-         
+
       case '\\':
-         
+
          if( *co->regparse == '\0')
             FAIL_COMPILE( co, EINVAL, "trailing \\");
-         
+
          ret = regex_node(co, EXACTLY);
          regex_c(co, *co->regparse++);
          regex_c(co, '\0');
          *flagp |= HASWIDTH | SIMPLE;
          break;
-         
+
       default:
       {
          size_t    len;
          mulle_utf32_t   ender;
-         
+
          co->regparse--;
          len = mulle_utf32_metacspn(co->regparse);
-         
+
          if( len == 0)
             FAIL_COMPILE( co, EINVAL, "internal error: strcspn 0");
-         
+
          ender = *(co->regparse + len);
-         
+
          if((len > 1) && ISREPN(ender))
             len--;      /* Back off clear of ?+* operand. */
-         
+
          *flagp |= HASWIDTH;
-         
+
          if( len == 1)
             *flagp |= SIMPLE;
-         
+
          ret = regex_node(co, EXACTLY);
-         
+
          for(; len > 0; len--)
             regex_c(co, *co->regparse++);
-         
+
          regex_c( co, '\0');
          break;
       }
    }
-   
+
    return( ret);
 }
 
@@ -775,12 +775,12 @@ static node   *regex_node( struct comp *co, int op)
       return( ret);
    }
 
-   
+
    ptr         = (char *) ret;
 
    assert( ptr[ -1] != (char) 0xFA);
    assert( ptr[ 0] == (char) 0xFA);
-   
+
    *ptr++      = (char) op;
    *ptr++      = '\0'; /* Null next pointer. */
    *ptr++      = '\0';
@@ -860,12 +860,12 @@ static void   regex_set_tail( struct comp *co, node *p, node *val)
       offset = (char *) val - (char *) scan;
       assert( val >= scan);
    }
-   
+
    s        = (char *) scan;
    *(s + 1) = (unsigned int) offset & 0xFF;
    *(s + 2) = ((unsigned int) offset >> 8) & 0xFF;
    *(s + 3) = ((unsigned int) offset >> 16) & 0xFF;
-   
+
    assert( regex_next_node( scan) == val);
 }
 
@@ -943,7 +943,7 @@ int    mulle_utf32regex_execute(  struct mulle_utf32regex *p, mulle_utf32_t *str
 
    /* memorize for later computation of ranges */
    prog->start = string;
-   
+
    /* Simplest case:  anchored match need be tried only once. */
    if( prog->reganch)
       return( regex_try_match( &ex, prog, string));
@@ -977,7 +977,7 @@ static int   regex_try_match( struct exec *ep, regexp *prog, mulle_utf32_t *s)
    memset( prog->startp, 0, (char *) &prog->endp[ NSUBEXP] - (char *) prog->startp);
 
    ep->reginput = s;
-   
+
    if( regex_match( ep, (node *) (prog->program + sizeof( mulle_utf32_t))))
    {
       prog->startp[ 0] = s;
@@ -1004,10 +1004,10 @@ static int  regex_match( struct exec *ep, node *prog)
    node   *scan;   /* Current node. */
    node   *next;   /* Next node. */
    int    c;
-   
+
 #ifdef DEBUG
    auto char    buf[ 64];
-   
+
    if( prog && regnarrate)
       fprintf(stderr, "%s(\n", regex_string_from_opcode(prog, buf));
 #endif
@@ -1036,7 +1036,7 @@ static int  regex_match( struct exec *ep, node *prog)
          c = *ep->reginput;
          if( ! c)
             return( 0);
-            
+
          ep->reginput++;
          break;
 
@@ -1093,7 +1093,7 @@ static int  regex_match( struct exec *ep, node *prog)
       {
          int       no     = OPCODE(scan) - OPEN;
          mulle_utf32_t   *input = ep->reginput;
-         
+
          assert( no >= 1 && no < NSUBEXP);
          if( regex_match(ep, next))
          {
@@ -1193,7 +1193,7 @@ static int  regex_match( struct exec *ep, node *prog)
             goto additional_open;
          if( OPCODE( scan) < CLOSE - 9 && OPCODE( scan) >= CLOSE - NSUBEXP)
             goto additional_close;
-            
+
          errno = EFAULT;
          return( -1);
       }
@@ -1265,7 +1265,7 @@ static size_t   regex_repeat( struct exec *ep, node *p)
 static node   *regex_next_node( node *p)
 {
    unsigned int   offset;
-   
+
    offset = NEXT_NODE_OFFSET( p);
    if( offset == 0)
       return( NULL);
@@ -1294,7 +1294,7 @@ void   mulle_utf32regex_dump( regexp *r)
       printf( "NULL\n");
       return;
    }
-   
+
    p = (node *) ((char *) r->program + sizeof( mulle_utf32_t));
 
    while( op != END)    /* While that wasn't END last time... */
@@ -1356,7 +1356,7 @@ static char    *regex_string_from_opcode( node *op, char buf[64])
 {
    char   *s;
    int    opcode;
-   
+
    strcpy( buf, ":");
 
    opcode = OPCODE(op);
@@ -1383,15 +1383,15 @@ static char    *regex_string_from_opcode( node *op, char buf[64])
       }
 
       if( opcode < CLOSE && opcode >= CLOSE - NSUBEXP)
-      {  
+      {
          sprintf( buf + strlen(buf), "CLOSE%d", CLOSE - OPCODE(op));
          return( buf);
       }
 
       s = "***corrupted opcode***";
-#ifdef TEST      
+#ifdef TEST
       abort();
-#endif      
+#endif
    }
 
    strcat( buf, s);

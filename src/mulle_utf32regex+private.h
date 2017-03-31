@@ -22,12 +22,12 @@ typedef struct mulle_utf32regex
 {
    mulle_utf32_t   *startp[ NSUBEXP];
    mulle_utf32_t   *endp[ NSUBEXP];
-   mulle_utf32_t   *start;             
-   mulle_utf32_t   regstart;		
-   mulle_utf32_t   *regmust;		
-   int       regmlen;		
-   short     reganch;		
-   char      program[ 1];	
+   mulle_utf32_t   *start;
+   mulle_utf32_t   regstart;
+   mulle_utf32_t   *regmust;
+   int       regmlen;
+   short     reganch;
+   char      program[ 1];
 } regexp;
 
 
