@@ -64,7 +64,7 @@ struct mulle_utf32range   mulle_utf32regex_range_for_index( struct mulle_utf32re
 
 
 #if MULLE_UTF_VERSION  < ((0 << 20) | (5 << 8) | 0)
-# error "mulle_utf is too old
+# error "mulle_utf is too old"
 #endif
 
 #endif

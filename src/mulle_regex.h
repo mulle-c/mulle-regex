@@ -9,7 +9,7 @@
 #ifndef mulle_regex_h__
 #define mulle_regex_h__
 
-#define MULLE_REGEX_VERSION  ((0 << 20) | (0 << 8) | 0)
+#define MULLE_REGEX_VERSION  ((0 << 20) | (0 << 8) | 1)
 
 
 #include "mulle_utf32regex.h"

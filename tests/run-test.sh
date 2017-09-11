@@ -10,5 +10,7 @@
 
 LIBRARY_SHORTNAME="mulle_regex"
 
-. "../mulle-tests/run-test-c-common.sh"
-. "../mulle-tests/run-test-common.sh"
+. "mulle-tests/test-c-common.sh"
+. "mulle-tests/test-tools-common.sh"
+. "mulle-tests/test-sharedlib-common.sh"
+. "mulle-tests/run-test-common.sh"
