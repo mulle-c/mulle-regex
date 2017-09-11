@@ -5,4 +5,4 @@
 # override the branches like so:
 #    echo "master" > .bootstrap.local/MULLE_UTF_BRANCH
 
-${MULLE_REPOSITORIES}/mulle-utf;;${MULLE_UTF_BRANCH:-release}
+${MULLE_REPOSITORIES:-https://github.com/mulle-nat}/mulle-utf;;${MULLE_UTF_BRANCH:-release}
