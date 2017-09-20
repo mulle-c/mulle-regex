@@ -12,8 +12,9 @@ else()
   include( Release)
 endif()
 
-
+set( MULLE_REGEX_LIBRARY ON)
 include( CMakeSourcesAndHeaders.txt)
+include( CMakeDependencies.txt)
 
 
 set( DEPENDENCY_LIBRARIES
@@ -30,17 +31,19 @@ ${SOURCES}
 )
 
 
-set( TARGET_ALL_LOAD_LIBRARIES
-$<TARGET_FILE:mulle_sprintf>
-${DEPENDENCY_LIBRARIES}
-)
-
 set( STANDALONE_BASE_NAME "mulle_regex")
 set( STANDALONE_NAME "mulle_regex_standalone")
+set( STANDALONE_DEFINITIONS ${MULLE_REGEX_DEFINITIONS})
+set( STANDALONE_ALL_LOAD_LIBRARIES
+$<TARGET_FILE:mulle_regex>
+${C_DEPENDENCY_LIBRARIES}
+)
 
 include( Standalone)
 
 INSTALL( TARGETS mulle_regex_standalone mulle_regex DESTINATION "lib")
 INSTALL( FILES ${HEADERS} DESTINATION "include/mulle_regex")
+
+include( MulleTest)
 
 

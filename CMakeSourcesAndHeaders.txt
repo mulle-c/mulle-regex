@@ -1,0 +1,11 @@
+
+set( HEADERS
+src/mulle_regex.h
+src/mulle_utf32regex.h
+src/mulle_utf32regex+private.h
+)
+
+set( SOURCES
+src/mulle_utf32regex.c
+src/mulle_utf32regex_substitute.c
+)
