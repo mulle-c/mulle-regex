@@ -1,3 +1,6 @@
+set( INCLUDE_DIRS
+src
+)
 
 set( HEADERS
 src/mulle_regex.h
@@ -8,4 +11,8 @@ src/mulle_utf32regex+private.h
 set( SOURCES
 src/mulle_utf32regex.c
 src/mulle_utf32regex_substitute.c
+)
+
+set( STANDALONE_SOURCES
+src/mulle_regex_standalone.c
 )
