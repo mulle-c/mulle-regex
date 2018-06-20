@@ -1,0 +1,10 @@
+mulle-c11;tar;no-link,no-recurse;f4e356c8-28ed-4243-8b0c-6921b81825ed;${MULLE_C11_URL:-https://github.com/mulle-c/mulle-c11/archive/${MULLE_C11_BRANCH:-latest}.tar.gz};;;;
+mulle-thread;tar;no-all-load;f4e8ac61-4445-4aa7-bc91-e3d30877275e;${MULLE_THREAD_URL:-https://github.com/mulle-c/mulle-thread/archive/${MULLE_THREAD_BRANCH:-latest}.tar.gz};;;;
+mulle-allocator;tar;no-all-load;4ee2e66c-912a-4a57-9f20-9acb4a16bc6d;${MULLE_ALLOCATOR_URL:-https://github.com/mulle-c/mulle-allocator/archive/${MULLE_ALLOCATOR_BRANCH:-latest}.tar.gz};;;;
+mulle-aba;tar;no-all-load;aec86023-9e7c-41ab-a60e-cd76f61a7899;${MULLE_ABA_URL:-https://github.com/mulle-c/mulle-aba/archive/${MULLE_ABA_BRANCH:-latest}.tar.gz};;;;
+mulle-concurrent;tar;no-all-load;11b71eb7-4c39-42ae-8dbe-ff6a118296db;${MULLE_CONCURRENT_URL:-https://github.com/mulle-c/mulle-concurrent/archive/${MULLE_CONCURRENT_BRANCH:-latest}.tar.gz};;;;
+mulle-buffer;tar;no-all-load;f2caa637-331f-4f79-9228-3e45538c2906;${MULLE_BUFFER_URL:-https://github.com/mulle-c/mulle-buffer/archive/${MULLE_BUFFER_BRANCH:-latest}.tar.gz};;;;
+mulle-container;tar;no-all-load;6eb5ee16-dbb3-426c-8955-fc1d14e1305d;${MULLE_CONTAINER_URL:-https://github.com/mulle-c/mulle-container/archive/${MULLE_CONTAINER_BRANCH:-latest}.tar.gz};;;;
+mulle-utf;tar;no-all-load;4b88bbed-7517-49b4-a378-87158e5b7611;${MULLE_UTF_URL:-https://github.com/mulle-c/mulle-utf/archive/${MULLE_UTF_BRANCH:-latest}.tar.gz};;;;
+mulle-vararg;tar;no-all-load;16ad93ac-31cb-4e7a-a347-ac4429c072e6;${MULLE_VARARG_URL:-https://github.com/mulle-c/mulle-vararg/archive/${MULLE_VARARG_BRANCH:-latest}.tar.gz};;;;
+mulle-sprintf;tar;no-all-load;bd1edfa8-2013-46b4-a1ac-dd44c0712dea;${MULLE_SPRINTF_URL:-https://github.com/mulle-c/mulle-sprintf/archive/${MULLE_SPRINTF_BRANCH:-latest}.tar.gz};;;;
