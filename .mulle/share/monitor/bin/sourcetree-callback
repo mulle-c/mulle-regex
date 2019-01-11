@@ -41,7 +41,7 @@ main()
    local filename="$2"
    local category="$3"
 
-   echo "cmake-sourcetree-update"
+   echo "sourcetree"
 }
 
 main "$@"
