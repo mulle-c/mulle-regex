@@ -9,6 +9,7 @@ xcuserdata/
 *~.*
 *.bak
 *.exe
+*.dSYM/
 project.xcworkspace/
 *.sublime-workspace
 tmp/

@@ -7,7 +7,7 @@ endif()
 
 set( INCLUDE_DIRS
 src
-) 
+)
 
 set( PRIVATE_HEADERS
 src/include-private.h
@@ -19,5 +19,5 @@ src/include.h
 src/mulle-regex.h
 src/mulle-utf32regex.h
 src/version.h
-) 
+)
 
