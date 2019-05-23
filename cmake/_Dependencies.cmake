@@ -5,8 +5,9 @@ if( MULLE_TRACE_INCLUDE)
    message( STATUS "# Include \"${CMAKE_CURRENT_LIST_FILE}\"" )
 endif()
 
+# sourcetree: MULLE_UTF;no-all-load,no-import,no-singlephase;
 if( NOT MULLE_UTF_LIBRARY)
-   find_library( MULLE_UTF_LIBRARY NAMES ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-utf${CMAKE_STATIC_LIBRARY_SUFFIX} mulle-utf)
+   find_library( MULLE_UTF_LIBRARY NAMES ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-utf${CMAKE_STATIC_LIBRARY_SUFFIX} mulle-utf NO_CMAKE_SYSTEM_PATH)
    message( STATUS "MULLE_UTF_LIBRARY is ${MULLE_UTF_LIBRARY}")
    #
    # the order looks ascending, but due to the way this file is read

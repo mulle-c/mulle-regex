@@ -3,6 +3,7 @@
 dependencies/
 .repos/
 build/
+kitchen/
 .DS_Store
 mulle-configuration/
 xcuserdata/
@@ -55,6 +56,7 @@ stash/
 
 # build stuff is boring too
 build/
+kitchen/
 dependency/
 addiction/
 *.tmp/
