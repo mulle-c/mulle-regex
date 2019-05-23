@@ -105,7 +105,7 @@ static void   multiple( FILE *fp)
       for (i = 0; i < 5; i++) {
          field[i] = scan;
          if (field[i] == NULL) {
-            fprintf( stderr, "bad testfile format", "");
+            fprintf( stderr, "bad testfile format\n");
             exit(1);
          }
          scan = strchr(scan, '\t');
