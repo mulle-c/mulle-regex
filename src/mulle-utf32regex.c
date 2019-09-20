@@ -951,7 +951,7 @@ int    mulle_utf32regex_execute(  struct mulle_utf32regex *p, mulle_utf32_t *str
    if( prog->regstart)
    {
       /* We know what char it must start with. */
-      for( s = string; s; s = mulle_utf32_strchr( s + 1, prog->regstart))
+      for( s = string; s; s = *s ? mulle_utf32_strchr( s + 1, prog->regstart) : NULL)
          if( regex_try_match (&ex, prog, s))
             return( 1);
 

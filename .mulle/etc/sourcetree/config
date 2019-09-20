@@ -1,1 +1,1 @@
-mulle-utf;tar;no-all-load,no-import,no-singlephase;3d57f486-a89e-4913-ba92-c917b36bfa3e;${MULLE_UTF_URL:-https://github.com/mulle-c/mulle-utf/archive/${MULLE_UTF_BRANCH:-latest}.tar.gz};;;;
+mulle-utf;${MULLE_UTF_NODETYPE:-tar};no-all-load,no-import,no-singlephase;3d57f486-a89e-4913-ba92-c917b36bfa3e;${MULLE_UTF_URL:-https://github.com/mulle-c/mulle-utf/archive/${MULLE_BRANCH}.tar.gz};${MULLE_UTF_BRANCH:-latest};;;
