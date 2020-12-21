@@ -7,19 +7,19 @@ export PROJECT_NAME="mulle-regex"
 #
 #
 #
-export PROJECT_IDENTIFIER="mulle_regex"
 
-
-#
-#
-#
-export PROJECT_DOWNCASE_IDENTIFIER="mulle_regex"
 
 
 #
 #
 #
-export PROJECT_UPCASE_IDENTIFIER="MULLE_REGEX"
+
+
+
+#
+#
+#
+
 
 
 #

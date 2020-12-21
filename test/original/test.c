@@ -32,7 +32,7 @@ static void   try( char *fields[ 5], int lineno)
 
    printf( "\n%d: %s %s %s %s %s: ", lineno, fields[ 0], fields[ 1], fields[ 2], fields[ 3], fields[ 4]);
 
-   pattern = mulle_utf8_convert_to_utf32( fields[ 0], -1, NULL);
+   pattern = _mulle_utf8_convert_to_utf32( fields[ 0], -1, NULL);
    r       = mulle_utf32regex_compile( pattern);
 
    expected_success = r != NULL && *fields[2] != 'c';
@@ -50,7 +50,7 @@ static void   try( char *fields[ 5], int lineno)
 //   mulle_utf32regex_dump( r);
 
 
-   input  = mulle_utf8_convert_to_utf32( fields[ 1], -1, NULL);
+   input  = _mulle_utf8_convert_to_utf32( fields[ 1], -1, NULL);
    result = mulle_utf32regex_execute( r, input);
 
    expected_success = result == 1 && *fields[2] != 'n';
@@ -68,12 +68,12 @@ static void   try( char *fields[ 5], int lineno)
 
    expected_failure = ! strcmp( "@", fields[ 4]);
 
-   replacement = mulle_utf8_convert_to_utf32( fields[ 3], -1, NULL);
+   replacement = _mulle_utf8_convert_to_utf32( fields[ 3], -1, NULL);
    result      = mulle_utf32regex_substitute( r, replacement, dbuf, BUFSIZ);
 
    if( result == 0)
    {
-      expect =  mulle_utf8_convert_to_utf32( fields[4], -1, NULL);
+      expect =  _mulle_utf8_convert_to_utf32( fields[4], -1, NULL);
       printf( "%s match",  ! mulle_utf32_strcmp( expect, dbuf) ? "" : "no ");
       mulle_allocator_free( NULL, expect);
    }
