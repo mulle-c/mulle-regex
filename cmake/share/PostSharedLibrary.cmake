@@ -1,3 +1,7 @@
+### If you want to edit this, copy it from cmake/share to cmake. It will be
+### picked up in preference over the one in cmake/share. And it will not get
+### clobbered with the next upgrade.
+
 # can be included multiple times
 
 if( MULLE_TRACE_INCLUDE)
@@ -5,12 +9,14 @@ if( MULLE_TRACE_INCLUDE)
 endif()
 
 # included by PostLibrary already
-# include( AllLoadC)
 
 CreateForceAllLoadList( ALL_LOAD_DEPENDENCY_LIBRARIES FORCE_ALL_LOAD_DEPENDENCY_LIBRARIES)
+# Frameworks aren't forced
+# CreateForceAllLoadList( ALL_LOAD_DEPENDENCY_FRAMEWORKS FORCE_ALL_LOAD_DEPENDENCY_FRAMEWORKS)
 
 set( SHARED_LIBRARY_LIST
    ${FORCE_ALL_LOAD_DEPENDENCY_LIBRARIES}
+   ${ALL_LOAD_DEPENDENCY_FRAMEWORKS}
    ${SHARED_LIBRARY_LIST}
 )
 

@@ -46,6 +46,7 @@ var/
 
 environment-user-*.sh
 environment-host-*.sh
+!environment-host-ci-*.sh
 
 
 # dynamically .mulle-sourcetree-fix is boring
