@@ -14,43 +14,58 @@
 
 #include <mulle-regex/mulle-regex.h>
 #include <mulle-regex/private/mulle-utf32regex-private.h>
+#include <mulle-buffer/mulle-buffer.h>
 #include <stdio.h>
 
 
 static void   try( char *fields[ 5], int lineno)
 {
-   mulle_utf32_t            dbuf[BUFSIZ];
-   int                      expected_success;
-   int                      expected_failure;
-   int                      result;
-   regexp                   *r;
-   mulle_utf32_t            *replacement;
-   mulle_utf32_t            *pattern;
-   mulle_utf32_t            *input;
-   mulle_utf32_t            *expect;
+   mulle_utf32_t                  dbuf[BUFSIZ];
+   int                            expected_success;
+   int                            expected_failure;
+   int                            result;
+   regexp                         *r;
+   mulle_utf32_t                  *replacement;
+   mulle_utf32_t                  *pattern;
+   mulle_utf32_t                  *input;
+   mulle_utf32_t                  *expect;
    struct mulle_utf_information   info;
+   struct mulle_buffer            pattern_buffer     = MULLE_BUFFER_INIT;
+   struct mulle_buffer            input_buffer       = MULLE_BUFFER_INIT;
+   struct mulle_buffer            replacement_buffer = MULLE_BUFFER_INIT;
+   struct mulle_buffer            expect_buffer      = MULLE_BUFFER_INIT;
+   mulle_utf32_t                  zero = 0;
 
    printf( "\n%d: %s %s %s %s %s: ", lineno, fields[ 0], fields[ 1], fields[ 2], fields[ 3], fields[ 4]);
 
-   pattern = _mulle_utf8_convert_to_utf32( fields[ 0], -1, NULL);
-   r       = mulle_utf32regex_compile( pattern);
+   mulle_utf8_bufferconvert_to_utf32( fields[ 0], -1, &pattern_buffer, (mulle_utf_add_bytes_function_t) mulle_buffer_add_bytes);
+   mulle_utf8_bufferconvert_to_utf32( fields[ 1], -1, &input_buffer, (mulle_utf_add_bytes_function_t) mulle_buffer_add_bytes);
+   mulle_utf8_bufferconvert_to_utf32( fields[ 3], -1, &replacement_buffer, (mulle_utf_add_bytes_function_t) mulle_buffer_add_bytes);
+   mulle_utf8_bufferconvert_to_utf32( fields[ 4], -1, &expect_buffer, (mulle_utf_add_bytes_function_t) mulle_buffer_add_bytes);
 
+   mulle_buffer_add_bytes( &pattern_buffer, &zero, sizeof( zero));
+   mulle_buffer_add_bytes( &input_buffer, &zero, sizeof( zero));
+   mulle_buffer_add_bytes( &replacement_buffer, &zero, sizeof( zero));
+   mulle_buffer_add_bytes( &expect_buffer, &zero, sizeof( zero));
+
+   pattern     = mulle_buffer_get_bytes( &pattern_buffer);
+   input       = mulle_buffer_get_bytes( &input_buffer);
+   replacement = mulle_buffer_get_bytes( &replacement_buffer);
+   expect      = mulle_buffer_get_bytes( &expect_buffer);
+
+   r                = mulle_utf32regex_compile( pattern);
    expected_success = r != NULL && *fields[2] != 'c';
    expected_failure = r == NULL && *fields[2] == 'c';
 
    if( ! expected_success || expected_failure)
    {
       printf( "%sexpected compilation failure", expected_failure ? "" : "un");
-
-      mulle_allocator_free( NULL, pattern);
-      mulle_utf32regex_free( r);
-      return;
+      goto done;
    }
 
 //   mulle_utf32regex_dump( r);
 
 
-   input  = _mulle_utf8_convert_to_utf32( fields[ 1], -1, NULL);
    result = mulle_utf32regex_execute( r, input);
 
    expected_success = result == 1 && *fields[2] != 'n';
@@ -59,31 +74,25 @@ static void   try( char *fields[ 5], int lineno)
    if( ! expected_success || expected_failure)
    {
       printf( "%sexpected execution failure", expected_failure ? "" : "un");
-
-      mulle_allocator_free( NULL, input);
-      mulle_allocator_free( NULL, pattern);
-      mulle_utf32regex_free( r);
-      return;
+      goto done;
    }
+
 
    expected_failure = ! strcmp( "@", fields[ 4]);
-
-   replacement = _mulle_utf8_convert_to_utf32( fields[ 3], -1, NULL);
-   result      = mulle_utf32regex_substitute( r, replacement, dbuf, BUFSIZ);
+   result = mulle_utf32regex_substitute( r, replacement, dbuf, BUFSIZ);
 
    if( result == 0)
-   {
-      expect =  _mulle_utf8_convert_to_utf32( fields[4], -1, NULL);
       printf( "%s match",  ! mulle_utf32_strcmp( expect, dbuf) ? "" : "no ");
-      mulle_allocator_free( NULL, expect);
-   }
    else
       printf( "%sexpected substitution failure", expected_failure ? "" : "un");
 
-   mulle_allocator_free( NULL, input);
-   mulle_allocator_free( NULL, pattern);
-   mulle_allocator_free( NULL, replacement);
+done:
    mulle_utf32regex_free( r);
+
+   mulle_buffer_done( &pattern_buffer);
+   mulle_buffer_done( &input_buffer);
+   mulle_buffer_done( &replacement_buffer);
+   mulle_buffer_done( &expect_buffer);
 }
 
 
@@ -170,7 +179,7 @@ static void   test( void)
 
    if( ! fp)
    {
-      fprintf( stderr, "tests file \"%s\" not found \n", path);
+      fprintf( stderr, "tests file \"%s\" not found\n", path);
       abort();
    }
 
