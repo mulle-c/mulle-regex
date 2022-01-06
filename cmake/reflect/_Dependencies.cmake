@@ -14,7 +14,7 @@ endif()
 #
 # Generated from sourcetree: DA632302-CC77-41E3-A7C2-16F226549339;mulle-utf;no-all-load,no-cmake-searchpath,no-import,no-singlephase;
 # Disable with : `mulle-sourcetree mark mulle-utf no-link`
-# Disable for this platform: `mulle-sourcetree mark mulle-utf no-cmake-platform-darwin`
+# Disable for this platform: `mulle-sourcetree mark mulle-utf no-cmake-platform-${MULLE_UNAME}`
 #
 if( NOT MULLE_UTF_LIBRARY)
    find_library( MULLE_UTF_LIBRARY NAMES ${CMAKE_STATIC_LIBRARY_PREFIX}mulle-utf${CMAKE_STATIC_LIBRARY_SUFFIX} mulle-utf NO_CMAKE_SYSTEM_PATH NO_SYSTEM_ENVIRONMENT_PATH)

@@ -20,6 +20,10 @@
  */
 
 #include "_mulle-regex-include.h"
+#ifndef MULLE_REGEX_EXTERN_GLOBAL
+# define MULLE_REGEX_EXTERN_GLOBAL MULLE_C_EXTERN_GLOBAL
+#endif
+
 
 /* You can add some more include statements here */
 
