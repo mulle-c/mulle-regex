@@ -12,6 +12,7 @@ endif()
 
 set( INCLUDE_DIRS
 src
+src/generic
 src/reflect
 )
 
@@ -26,7 +27,7 @@ src/reflect/_mulle-regex-include-private.h
 # contents selected with patternfile ??-header--private-generic-headers
 #
 set( PRIVATE_GENERIC_HEADERS
-src/include-private.h
+src/generic/include-private.h
 )
 
 #
@@ -42,13 +43,14 @@ src/mulle-utf32regex-private.h
 set( PUBLIC_GENERATED_HEADERS
 src/reflect/_mulle-regex-include.h
 src/reflect/_mulle-regex-provide.h
+src/reflect/_mulle-regex-versioncheck.h
 )
 
 #
 # contents selected with patternfile ??-header--public-generic-headers
 #
 set( PUBLIC_GENERIC_HEADERS
-src/include.h
+src/generic/include.h
 )
 
 #
