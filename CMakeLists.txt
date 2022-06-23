@@ -1,7 +1,6 @@
-cmake_minimum_required( VERSION 3.1)
+cmake_minimum_required( VERSION 3.15)
 
 project( mulle-regex C)
-add_definitions( -DMULLE_REGEX_EXTERN_GLOBAL=extern)
 
 
 
