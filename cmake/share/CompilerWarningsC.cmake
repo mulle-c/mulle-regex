@@ -18,7 +18,7 @@ if( NOT __UNWANTED_WARNINGS_C_CMAKE__)
       # move this to ObjC
       #
       if( "${MULLE_C_COMPILER_ID}" MATCHES "^(Clang|AppleClang|MulleClang|GNU)$")
-         set( UNWANTED_C_WARNINGS "-Wno-parentheses -Wno-int-to-void-pointer-cast")
+         set( UNWANTED_C_WARNINGS "-Wno-parentheses")
       else()
          if( "${MULLE_C_COMPILER_ID}" MATCHES "^(Intel|MSVC|MSVC-Clang|MSVC-MulleClang)$")
             # C4068: unwanted pragma
@@ -35,10 +35,17 @@ if( NOT __UNWANTED_WARNINGS_C_CMAKE__)
       endif()
    endif()
 
+   if( NOT DEFINED WANTED_WARNINGS)
+      option( WANTED_WARNINGS "Turn off some desirable compiler warnings" ON)
+   endif()
+
+   if( UNWANTED_WARNINGS)
+      #
+      # move this to ObjC
+      #
+      if( "${MULLE_C_COMPILER_ID}" MATCHES "^(Clang|AppleClang|MulleClang|GNU)$")
+         set( WANTED_C_WARNINGS "-Wuninitialized -Wunused")
+      endif()
+   endif()
+
 endif()
-
-
-# extension : mulle-c/c-cmake
-# directory : project/all
-# template  : .../UnwantedWarningsC.cmake
-# Suppress this comment with `export MULLE_SDE_GENERATE_FILE_COMMENTS=NO`

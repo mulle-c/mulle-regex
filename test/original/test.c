@@ -13,7 +13,7 @@
  */
 
 #include <mulle-regex/mulle-regex.h>
-#include <mulle-regex/private/mulle-utf32regex-private.h>
+#include <mulle-regex/mulle-utf32regex-private.h>
 #include <mulle-buffer/mulle-buffer.h>
 #include <stdio.h>
 
@@ -30,10 +30,10 @@ static void   try( char *fields[ 5], int lineno)
    mulle_utf32_t                  *input;
    mulle_utf32_t                  *expect;
    struct mulle_utf_information   info;
-   struct mulle_buffer            pattern_buffer     = MULLE_BUFFER_INIT;
-   struct mulle_buffer            input_buffer       = MULLE_BUFFER_INIT;
-   struct mulle_buffer            replacement_buffer = MULLE_BUFFER_INIT;
-   struct mulle_buffer            expect_buffer      = MULLE_BUFFER_INIT;
+   struct mulle_buffer            pattern_buffer     = MULLE_BUFFER_INIT( NULL);
+   struct mulle_buffer            input_buffer       = MULLE_BUFFER_INIT( NULL);
+   struct mulle_buffer            replacement_buffer = MULLE_BUFFER_INIT( NULL);
+   struct mulle_buffer            expect_buffer      = MULLE_BUFFER_INIT( NULL);
    mulle_utf32_t                  zero = 0;
 
    printf( "\n%d: %s %s %s %s %s: ", lineno, fields[ 0], fields[ 1], fields[ 2], fields[ 3], fields[ 4]);

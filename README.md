@@ -1,3 +1,7 @@
+# mulle-regex
+
+#### > This is a unicode interpretation of the Henry Spencer regexp
+
 # 📣 Unicode regex library
 
 > This is a unicode interpretation of the Henry Spencer regexp
@@ -12,11 +16,8 @@
 > Copyright (c) 2011 Mulle kybernetiK
 > Additional coding by Nat!
 
-
-
 Copyright (c) 1986, 1993, 1995 by University of Toronto.
 Written by Henry Spencer.  Not derived from licensed software.
-
 Permission is granted to anyone to use this software for any
 purpose on any computer system, and to redistribute it in any way,
 subject to the following restrictions:
@@ -33,8 +34,6 @@ be misrepresented (by explicit claim or omission) as being
 the original software.
 
 4. This notice must not be removed or altered.
-
-
 This is a revision of my well-known regular-expression package, regexp(3).
 It gives C programs the ability to use egrep-style regular expressions, and
 does it in a much cleaner fashion than the analogous routines in SysV.
@@ -67,18 +66,18 @@ modifications) in your manual-pages directory.
 
 The files are:
 
-COPYRIGHT	copyright notice
-README		this text
-Makefile	instructions to make everything
-regexp.3	manual page
-regexp.h	header file, for /usr/include
-regexp.c	source for regcomp() and regexec()
-regsub.c	source for regsub()
-regerror.c	source for default regerror()
-regmagic.h	internal header file
-try.c		source for test program
-timer.c		source for timing program
-tests		test list for try and timer
+    COPYRIGHT	copyright notice
+    README		this text
+    Makefile	instructions to make everything
+    regexp.3	manual page
+    regexp.h	header file, for /usr/include
+    regexp.c	source for regcomp() and regexec()
+    regsub.c	source for regsub()
+    regerror.c	source for default regerror()
+    regmagic.h	internal header file
+    try.c		source for test program
+    timer.c		source for timing program
+    tests		test list for try and timer
 
 This implementation uses nondeterministic automata rather than the
 deterministic ones found in some other implementations, which makes it
@@ -95,3 +94,85 @@ tuning have been made, but this is invariably a bit machine-specific.
 
 This distribution lives at ftp://ftp.zoo.toronto.edu/pub/bookregexp.{tar|shar}
 at present.
+
+
+| Release Version                                       | Release Notes
+|-------------------------------------------------------|--------------
+| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-regex.svg?branch=release) [![Build Status](https://github.com/mulle-c/mulle-regex/workflows/CI/badge.svg?branch=release)](//github.com/mulle-c/mulle-regex/actions)| [RELEASENOTES](RELEASENOTES.md) |
+
+
+
+
+
+
+### You are here
+
+![Overview](overview.dot.svg)
+
+
+
+
+
+## Add
+
+**This project is a component of the [mulle-core](//github.com/mulle-core/mulle-core) library. As such you usually will *not* add or install it
+individually, unless you specifically do not want to link against
+`mulle-core`.**
+
+
+### Add as an individual component
+
+Use [mulle-sde](//github.com/mulle-sde) to add mulle-regex to your project:
+
+``` sh
+mulle-sde add github:mulle-c/mulle-regex
+```
+
+To only add the sources of mulle-regex with dependency
+sources use [clib](https://github.com/clibs/clib):
+
+
+``` sh
+clib install --out src/mulle-c mulle-c/mulle-regex
+```
+
+Add `-isystem src/mulle-c` to your `CFLAGS` and compile all the sources that were downloaded with your project.
+
+
+## Install
+
+### Install with mulle-sde
+
+Use [mulle-sde](//github.com/mulle-sde) to build and install mulle-regex and all dependencies:
+
+``` sh
+mulle-sde install --prefix /usr/local \
+   https://github.com/mulle-c/mulle-regex/archive/latest.tar.gz
+```
+
+### Manual Installation
+
+Install the requirements:
+
+| Requirements                                 | Description
+|----------------------------------------------|-----------------------
+| [mulle-utf](https://github.com/mulle-c/mulle-utf)             | 🔤 UTF8-16-32 analysis and manipulation library
+
+Install **mulle-regex** into `/usr/local` with [cmake](https://cmake.org):
+
+``` sh
+cmake -B build \
+      -DCMAKE_INSTALL_PREFIX=/usr/local \
+      -DCMAKE_PREFIX_PATH=/usr/local \
+      -DCMAKE_BUILD_TYPE=Release &&
+cmake --build build --config Release &&
+cmake --install build --config Release
+```
+
+
+## Author
+
+[Nat!](https://mulle-kybernetik.com/weblog) for Mulle kybernetiK
+
+
+

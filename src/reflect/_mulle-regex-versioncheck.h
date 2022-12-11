@@ -3,7 +3,7 @@
  *   Any edits will be lost.
  */
 #if defined( MULLE_UTF_VERSION)
-# if MULLE_UTF_VERSION < ((3 << 20) | (1 << 8) | 0)
+# if MULLE_UTF_VERSION < ((3 << 20) | (1 << 8) | 3)
 #  error "mulle-utf is too old"
 # endif
 # if MULLE_UTF_VERSION >= ((4 << 20) | (0 << 8) | 0)

@@ -46,7 +46,7 @@ if( STANDALONE)
    endif()
 
    if( NOT STANDALONE_DEFINITIONS)
-      set( STANDALONE_DEFINITIONS ${MULLE_REGEX_DEFINITIONS})
+      set( STANDALONE_DEFINITIONS ${MULLE__REGEX_DEFINITIONS})
    endif()
 
    #
@@ -88,7 +88,7 @@ if( STANDALONE)
       if( NOT STANDALONE_SOURCES)
          message( FATAL_ERROR "You need to define STANDALONE_SOURCES. Add a file
 ${STANDALONE_LIBRARY_NAME}.c with contents like this to it:
-int  ___mulle_regex_unused__;
+int  ___mulle__regex_unused__;
 and everybody will be happy")
       endif()
 
@@ -199,9 +199,3 @@ and everybody will be happy")
       message( STATUS "OS_SPECIFIC_FRAMEWORKS is ${OS_SPECIFIC_FRAMEWORKS}")
    endif()
 endif()
-
-
-# extension : mulle-c/c-cmake
-# directory : project/all
-# template  : .../StandaloneC.cmake
-# Suppress this comment with `export MULLE_SDE_GENERATE_FILE_COMMENTS=NO`

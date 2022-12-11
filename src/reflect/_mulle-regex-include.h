@@ -16,13 +16,13 @@
 
 // You can tweak the following #include with these commands.
 // (Use DA632302-CC77-41E3-A7C2-16F226549339 instead of mulle-utf if there are duplicate entries)
-//    remove:             `mulle-sde dependency mark mulle-utf no-header`
-//    rename:             `mulle-sde dependency|library set mulle-utf include whatever.h`
-//    reorder:            `mulle-sde dependency move mulle-utf <up|down>`
+//    remove #include:: `mulle-sde dependency mark mulle-utf no-header`
+//    rename:              `mulle-sde dependency|library set mulle-utf include whatever.h`
+//    reorder:             `mulle-sde dependency move mulle-utf <up|down>`
 //    toggle #include:    `mulle-sde dependency mark mulle-utf [no-]import`
-//    toggle public:      `mulle-sde dependency mark mulle-utf [no-]public`
-//    toggle optional:    `mulle-sde dependency mark mulle-utf [no-]require`
-//    remove for platform:`mulle-sde dependency mark mulle-utf no-platform-<uname>`
+//    toggle public:       `mulle-sde dependency mark mulle-utf [no-]public`
+//    toggle optional:     `mulle-sde dependency mark mulle-utf [no-]require`
+//    remove for platform: `mulle-sde dependency mark mulle-utf no-platform-<uname>`
 //        (use `mulle-sourcetree-to-c --unames` to list known values)
 #include <mulle-utf/mulle-utf.h>   // mulle-utf
 

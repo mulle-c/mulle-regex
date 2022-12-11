@@ -19,8 +19,8 @@ include( Files)
 
 if( HEADERS_PHASE)
    install( FILES ${INSTALL_PUBLIC_HEADERS}  DESTINATION "include/mulle-regex")
-   install( FILES ${INSTALL_PRIVATE_HEADERS} DESTINATION "include/mulle-regex/private")
-   install( FILES ${CMAKE_INCLUDES}          DESTINATION "include/mulle-regex/cmake")
+   install( FILES ${INSTALL_PRIVATE_HEADERS} DESTINATION "include/mulle-regex")
+   install( FILES ${INSTALL_CMAKE_INCLUDES}          DESTINATION "include/mulle-regex/cmake")
 
    # short cut out
    if( NOT COMPILE_PHASE AND NOT LINK_PHASE)
@@ -33,5 +33,14 @@ if( LINK_PHASE)
 endif()
 
 include( Library)
+
+# use LIBRARY_COMPILE_TARGET for compiler options
+target_compile_definitions( "${LIBRARY_COMPILE_TARGET}" PUBLIC)
+target_compile_options( "${LIBRARY_COMPILE_TARGET}" PUBLIC)
+# use LIBRARY_LINK_TARGET for linker options
+if( LINK_PHASE)
+   target_link_options( "${LIBRARY_LINK_TARGET}" PUBLIC)
+endif()
+
 include( InstallLibrary)
 include( FinalOutput OPTIONAL)
