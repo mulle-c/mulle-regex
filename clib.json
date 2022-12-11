@@ -1,0 +1,26 @@
+{
+   "name" : "mulle-regex",
+   "version" : "0.7.57",
+   "description" : "> This is a unicode interpretation of the Henry Spencer regexp",
+   "keywords" : [],
+   "license" : "UNLICENSED",
+   "repo" : "mulle-c/mulle-regex",
+   "src" : [
+      "src/generic/include-private.h",
+      "src/generic/include.h",
+      "src/mulle-regex-standalone.c",
+      "src/mulle-regex.h",
+      "src/mulle-utf32regex-private.h",
+      "src/mulle-utf32regex-substitute.c",
+      "src/mulle-utf32regex.c",
+      "src/mulle-utf32regex.h",
+      "src/reflect/_mulle-regex-include-private.h",
+      "src/reflect/_mulle-regex-include.h",
+      "src/reflect/_mulle-regex-provide.h",
+      "src/reflect/_mulle-regex-versioncheck.h",
+      "src/version.h"
+   ],
+   "dependencies" : {
+      "mulle-c/mulle-utf": "*"
+   }
+}

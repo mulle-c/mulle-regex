@@ -1,0 +1,20 @@
+{
+   project =
+   {
+      description="> This is a unicode interpretation of the Henry Spencer regexp";
+      domain="github";
+      name="mulle-regex";
+      user="mulle-c";
+      repo="mulle-regex";
+      homepage="https://github.com/mulle-c/mulle-regex";
+      license="UNLICENSED"
+   };
+   dependencies =
+   (
+      {
+         name="mulle-utf";
+         url="https://github.com/mulle-c/mulle-utf";
+         description="🔤 UTF8-16-32 analysis and manipulation library";
+      }
+   )
+}
