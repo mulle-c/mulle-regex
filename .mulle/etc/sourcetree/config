@@ -1,1 +1,1 @@
-mulle-utf;${MULLE_UTF_NODETYPE:-tar};no-all-load,no-cmake-searchpath,no-import,no-singlephase;DA632302-CC77-41E3-A7C2-16F226549339;${MULLE_UTF_URL:-https://github.com/mulle-c/mulle-utf/archive/${MULLE_TAG}.tar.gz};${MULLE_UTF_BRANCH};${MULLE_UTF_TAG:-latest};;
+mulle-utf;${MULLE__UTF_NODETYPE:-tar};no-all-load,no-cmake-searchpath,no-import,no-singlephase;DA632302-CC77-41E3-A7C2-16F226549339;${MULLE__UTF_URL:-https://github.com/mulle-c/mulle-utf/archive/${MULLE_TAG}.tar.gz};${MULLE__UTF_BRANCH};${MULLE__UTF_TAG:-latest};;

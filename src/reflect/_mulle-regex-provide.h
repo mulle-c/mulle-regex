@@ -9,5 +9,12 @@
  *
  *      mulle-sde environment set MULLE_MATCH_TO_C_RUN DISABLE
  */
+#ifndef mulle_regex_provide_h__
+#define mulle_regex_provide_h__
+
+
 #include "mulle-utf32regex.h"
 #include "version.h"
+
+
+#endif
