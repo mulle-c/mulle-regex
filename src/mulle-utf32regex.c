@@ -17,8 +17,8 @@
 /* (nat) to unconfuse/confuse the code, the "program space" is pointed
  *       by a unknown pointer called node. This should make arithmetic harder,
  *       which is good, because it catches more errors. Also inside the code,
- *       it is clearer what is a real "char", "mulle_utf32_t" or just amorphous buffer
- *       space
+ *       it is clearer what is a real "char", "mulle_utf32_t" or just
+ *       amorphous buffer space
  */
 typedef struct _anonymous_node   node;
 
@@ -144,7 +144,9 @@ static inline mulle_utf32_t   *OPERAND(node *p)
 
 
 /*
- * Utility definitions.
+ * Utility definitions. What this code is mostly missing is the {2} specifier
+ * how many repetitions are sought. That's probably no super convenient
+ * to "explode" in preprocessing code.
  */
 #define  ISREPN(c)   ((c) == '*' || (c) == '+' || (c) == '?')
 #define  META     "^$.[()|?+*\\"
@@ -238,10 +240,11 @@ mulle_utf32_t   *mulle_utf32_substitute( mulle_utf32_t *pattern,
 
    buf  = NULL;
    rval = 0;
+   // len in bytes
    len  = mulle_utf32regex_substitution_buffer_size( p, replacement);
    if( len)
    {
-      buf = malloc( sizeof( mulle_utf32_t) * len);
+      buf = malloc( len);
       if( buf)
          rval = mulle_utf32regex_substitute( p, replacement, buf, len);
    }
@@ -257,10 +260,10 @@ mulle_utf32_t   *mulle_utf32_substitute( mulle_utf32_t *pattern,
 }
 
 
-struct mulle_utf32range   mulle_utf32regex_range_for_index( struct mulle_utf32regex *rp, unsigned int i)
+struct mulle_range   mulle_utf32regex_range_for_index( struct mulle_utf32regex *rp, unsigned int i)
 {
-   struct mulle_utf32range   range;
-   regexp                    *p;
+   struct mulle_range   range;
+   regexp               *p;
 
    p = rp;
    if( i >= NSUBEXP || ! p->startp[ i])
@@ -400,8 +403,8 @@ static node   *regex_generic( struct comp *co, int paren, int *flagp)     /* Par
    node   *ret;
    node   *br;
    node   *ender;
-   int         parno;
-   int         flags;
+   int     parno;
+   int     flags;
 
    *flagp = HASWIDTH;   /* Tentatively. */
 
@@ -472,11 +475,11 @@ static node   *regex_generic( struct comp *co, int paren, int *flagp)     /* Par
  */
 static node   *regex_branch( struct comp *co, int *flagp)
 {
-   node         *ret;
-   node        *chain;
-   node        *latest;
-   int         flags;
-   mulle_utf32_t     c;
+   node            *ret;
+   node            *chain;
+   node            *latest;
+   int             flags;
+   mulle_utf32_t   c;
 
    *flagp = WORST;            /* Tentatively. */
 
@@ -1041,7 +1044,7 @@ static int  regex_match( struct exec *ep, node *prog)
 
       case EXACTLY:
       {
-         size_t    len;
+         size_t          len;
          mulle_utf32_t   *opnd = OPERAND(scan);
 
          /* Inline the first character, for speed. */
@@ -1164,11 +1167,12 @@ static int  regex_match( struct exec *ep, node *prog)
       case STAR:
       case PLUS:
       {
-         mulle_utf32_t   nextch =
-            (OPCODE(next) == EXACTLY) ? *OPERAND(next) : '\0';
-         size_t    no;
+         mulle_utf32_t   nextch = (OPCODE(next) == EXACTLY)
+                                  ? *OPERAND(next)
+                                  : '\0';
+         size_t          no;
          mulle_utf32_t   *save = ep->reginput;
-         size_t    min   = (OPCODE(scan) == STAR) ? 0 : 1;
+         size_t          min   = (OPCODE(scan) == STAR) ? 0 : 1;
 
          for( no = regex_repeat(ep, _NEXT(scan)) + 1; no > min; no--)
          {
@@ -1290,7 +1294,7 @@ void   mulle_utf32regex_dump( regexp *r)
 
    if( ! r)
    {
-      printf( "NULL\n");
+      fprintf( stderr, "NULL\n");
       return;
    }
 
@@ -1299,13 +1303,13 @@ void   mulle_utf32regex_dump( regexp *r)
    while( op != END)    /* While that wasn't END last time... */
    {
       op = OPCODE( p);
-         printf( "%2ld%s", (char *) p - r->program, regex_string_from_opcode( p, buf)); /* Where, what. */
+         fprintf( stderr, "%2td%s", (char *) p - r->program, regex_string_from_opcode( p, buf)); /* Where, what. */
       next = regex_next_node( p);
 
       if( ! next)    /* Next ptr. */
-         printf("(0)");
+         fprintf( stderr, "(0)");
       else
-         printf("(%ld)", ((char *) p - r->program) + ((char *) next - (char *) p));
+         fprintf( stderr, "(%td)", ((char *) p - r->program) + ((char *) next - (char *) p));
 
       p = _NEXT( p);
 
@@ -1316,7 +1320,7 @@ void   mulle_utf32regex_dump( regexp *r)
          /* Literal string, where present. */
          while( *s != '\0')
          {
-            putchar( isprint( *s) ? *s : '.');
+            fputc( isprint( *s) ? *s : '.', stderr);
             s++;
          }
 
@@ -1324,27 +1328,27 @@ void   mulle_utf32regex_dump( regexp *r)
          p = (void *) s;
       }
 
-      putchar('\n');
+      fputc('\n', stderr);
    }
 
    /* Header fields of interest. */
    if( r->regstart != '\0')
-      printf("start `%c' ", isprint( r->regstart) ? r->regstart : '.');
+      fprintf( stderr, "start `%c' ", isprint( r->regstart) ? r->regstart : '.');
 
    if( r->reganch)
-      printf("anchored ");
+      fprintf( stderr, "anchored ");
 
    if( r->regmust != NULL)
    {
       mulle_utf32_t *s1;
 
-      printf("must have \"");
+      fprintf( stderr, "must have \"");
       for( s1 = r->regmust; *s1; s1++)
-         putchar( isprint( *s1) ? *s1 : '.');
-      printf( "\"");
+         putc( isprint( *s1) ? *s1 : '.', stderr);
+      fprintf( stderr, "\"");
    }
 
-   printf("\n");
+   fprintf( stderr, "\n");
 }
 
 

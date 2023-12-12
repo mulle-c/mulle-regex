@@ -45,7 +45,10 @@ static int  octal( mulle_utf32_t **src_p)
 /*
  *  - mulle_unicode_regex_substitute - perform substitutions after a regexp match
  */
-int   mulle_utf32regex_substitute( struct mulle_utf32regex *rp, mulle_utf32_t *src, mulle_utf32_t *dst, size_t dst_len)
+int   mulle_utf32regex_substitute( struct mulle_utf32regex *rp,
+                                   mulle_utf32_t *src,
+                                   mulle_utf32_t *dst,
+                                   size_t dst_len)
 {
    regexp          *prog = (regexp *) rp;
    mulle_utf32_t   c;
@@ -98,7 +101,7 @@ int   mulle_utf32regex_substitute( struct mulle_utf32regex *rp, mulle_utf32_t *s
                              break;
 
                         /* MUST be octal like this 0nnn */
-                  case '0' : no = octal( &src);
+                  case '0' : no = octal( &src);  // checks for < 10
                              if( ! no)
                              {
                                 errno = EPERM;
@@ -109,7 +112,7 @@ int   mulle_utf32regex_substitute( struct mulle_utf32regex *rp, mulle_utf32_t *s
                   break;
 
          default : *dst++ = c;
-                    continue;
+                   continue;
       }
 
       /* is that even an allowed index ? */
@@ -125,7 +128,7 @@ int   mulle_utf32regex_substitute( struct mulle_utf32regex *rp, mulle_utf32_t *s
       if( &dst[ len] >= dst_sentinel)
          break;
 
-      (void) mulle_utf32_strncpy( dst, prog->startp[ no], len);
+      (void) mulle_utf32_strncpy( dst, len, prog->startp[ no]);
       dst += len;
 
       if( ! dst[ -1])   /* strncpy hit NUL. */
@@ -140,7 +143,8 @@ int   mulle_utf32regex_substitute( struct mulle_utf32regex *rp, mulle_utf32_t *s
 }
 
 
-size_t   mulle_utf32regex_substitution_buffer_size( struct mulle_utf32regex *rp, mulle_utf32_t *src)
+unsigned int   mulle_utf32regex_substitution_length( struct mulle_utf32regex *rp,
+                                                     mulle_utf32_t *src)
 {
    regexp          *prog = (regexp *) rp;
    mulle_utf32_t   c;
@@ -158,7 +162,14 @@ size_t   mulle_utf32regex_substitution_buffer_size( struct mulle_utf32regex *rp,
    {
       c = *src++;
       if( ! c)
+      {
+         if( (unsigned int) dst_len != dst_len)
+         {
+            errno = E2BIG;
+            return( 0);
+         }
          return( dst_len);
+      }
 
       no = 0;
       switch( c)
@@ -203,7 +214,7 @@ size_t   mulle_utf32regex_substitution_buffer_size( struct mulle_utf32regex *rp,
 
       assert( prog->endp[ no]);
 
-      len      = prog->endp[ no] - prog->startp[ no];
+      len      = (size_t) (prog->endp[ no] - prog->startp[ no]);
       dst_len += len;
    }
    return( 0);

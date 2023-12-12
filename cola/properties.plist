@@ -1,13 +1,13 @@
 {
    project =
    {
-      description="> This is a unicode interpretation of the Henry Spencer regexp";
+      description="📣 Unicode regex library";
       domain="github";
       name="mulle-regex";
       user="mulle-c";
       repo="mulle-regex";
       homepage="https://github.com/mulle-c/mulle-regex";
-      license="UNLICENSED"
+      license="Public Domain"
    };
    dependencies =
    (

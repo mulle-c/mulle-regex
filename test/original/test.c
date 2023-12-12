@@ -15,6 +15,7 @@
 #include <mulle-regex/mulle-regex.h>
 #include <mulle-regex/mulle-utf32regex-private.h>
 #include <mulle-buffer/mulle-buffer.h>
+#include <mulle-fprintf/mulle-fprintf.h>
 #include <stdio.h>
 
 
@@ -36,12 +37,11 @@ static void   try( char *fields[ 5], int lineno)
    struct mulle_buffer            expect_buffer      = MULLE_BUFFER_INIT( NULL);
    mulle_utf32_t                  zero = 0;
 
-   printf( "\n%d: %s %s %s %s %s: ", lineno, fields[ 0], fields[ 1], fields[ 2], fields[ 3], fields[ 4]);
 
-   mulle_utf8_bufferconvert_to_utf32( fields[ 0], -1, &pattern_buffer, (mulle_utf_add_bytes_function_t) mulle_buffer_add_bytes);
-   mulle_utf8_bufferconvert_to_utf32( fields[ 1], -1, &input_buffer, (mulle_utf_add_bytes_function_t) mulle_buffer_add_bytes);
-   mulle_utf8_bufferconvert_to_utf32( fields[ 3], -1, &replacement_buffer, (mulle_utf_add_bytes_function_t) mulle_buffer_add_bytes);
-   mulle_utf8_bufferconvert_to_utf32( fields[ 4], -1, &expect_buffer, (mulle_utf_add_bytes_function_t) mulle_buffer_add_bytes);
+   mulle_utf8_bufferconvert_to_utf32( fields[ 0], -1, &pattern_buffer, mulle_buffer_add_bytes_callback);
+   mulle_utf8_bufferconvert_to_utf32( fields[ 1], -1, &input_buffer, mulle_buffer_add_bytes_callback);
+   mulle_utf8_bufferconvert_to_utf32( fields[ 3], -1, &replacement_buffer,mulle_buffer_add_bytes_callback);
+   mulle_utf8_bufferconvert_to_utf32( fields[ 4], -1, &expect_buffer, mulle_buffer_add_bytes_callback);
 
    mulle_buffer_add_bytes( &pattern_buffer, &zero, sizeof( zero));
    mulle_buffer_add_bytes( &input_buffer, &zero, sizeof( zero));
@@ -52,6 +52,8 @@ static void   try( char *fields[ 5], int lineno)
    input       = mulle_buffer_get_bytes( &input_buffer);
    replacement = mulle_buffer_get_bytes( &replacement_buffer);
    expect      = mulle_buffer_get_bytes( &expect_buffer);
+
+   mulle_printf( "\n%d: %lS %lS %s %lS %lS: ", lineno, pattern, input, fields[ 2], replacement, expect);
 
    r                = mulle_utf32regex_compile( pattern);
    expected_success = r != NULL && *fields[2] != 'c';
