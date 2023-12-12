@@ -13,13 +13,6 @@
 
 struct mulle_utf32regex;
 
-struct mulle_utf32range
-{
-   unsigned long   location;
-   unsigned long   length;
-};
-
-
 // think of the parameters as
 //
 //   dst = `echo src | sed  's/pattern/replacement/'
@@ -35,7 +28,8 @@ static inline void   mulle_utf32regex_free( struct mulle_utf32regex *regex)
 
 
 /* returns < 0 on failure, 1 on match, 0 on no match */
-int   mulle_utf32regex_execute( struct mulle_utf32regex *regex, mulle_utf32_t *src);
+int   mulle_utf32regex_execute( struct mulle_utf32regex *regex,
+                                mulle_utf32_t *src);
 
 /* returns < 0 on failure, 0 otherwise
  */
@@ -57,15 +51,32 @@ mulle_utf32_t   *mulle_utf32_substitute( mulle_utf32_t *pattern,
                                          mulle_utf32_t *replacement,
                                          mulle_utf32_t *src);
 
-size_t   mulle_utf32regex_substitution_buffer_size( struct mulle_utf32regex *regex, mulle_utf32_t *replacement);
+// Length of the string that will be substituted in the matched part of the
+// string. You need to add the front and back part yourself.
+unsigned int   mulle_utf32regex_substitution_length( struct mulle_utf32regex *regex,
+                                                     mulle_utf32_t *replacement);
 
-struct mulle_utf32range   mulle_utf32regex_range_for_index( struct mulle_utf32regex *regex, unsigned int i);
+// len in bytes(!)
+static inline size_t
+   mulle_utf32regex_substitution_buffer_size( struct mulle_utf32regex *regex,
+                                              mulle_utf32_t *replacement)
+{
+   return( mulle_utf32regex_substitution_length( regex, replacement) * sizeof( mulle_utf32_t));
+}
 
 
+//
+// use 0 to get range of matched string
+// use 1-9 for \1 to \9
+//
+struct mulle_range   mulle_utf32regex_range_for_index( struct mulle_utf32regex *regex, unsigned int i);
 
-#if MULLE__UTF_VERSION  < ((0 << 20) | (5 << 8) | 0)
-# error "mulle_utf is too old"
+#ifdef __has_include
+# if __has_include( "_mulle-regex-versioncheck.h")
+#  include "_mulle-regex-versioncheck.h"
+# endif
 #endif
+
 
 #endif
 

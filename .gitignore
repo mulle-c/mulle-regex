@@ -68,3 +68,7 @@ tmp.*/
 version.old
 .gdb_history
 wilted/
+coverage*.html
+*.gcda
+*.gcno
+*-preview-*.html
