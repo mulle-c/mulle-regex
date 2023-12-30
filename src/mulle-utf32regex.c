@@ -246,7 +246,7 @@ mulle_utf32_t   *mulle_utf32_substitute( mulle_utf32_t *pattern,
    {
       buf = malloc( len);
       if( buf)
-         rval = mulle_utf32regex_substitute( p, replacement, buf, len);
+         rval = mulle_utf32regex_substitute( p, replacement, buf, len, 1);
    }
    mulle_utf32regex_free( p);
 
@@ -1277,7 +1277,7 @@ static node   *regex_next_node( node *p)
 }
 
 
-#ifdef DEBUG
+//#ifdef DEBUG
 
 static char   *regex_string_from_opcode( node *s, char buf[ 64]);
 
@@ -1402,5 +1402,5 @@ static char    *regex_string_from_opcode( node *op, char buf[64])
 }
 
 
-#endif /* ifdef DEBUG */
+//#endif /* ifdef DEBUG */
 

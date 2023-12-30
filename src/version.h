@@ -3,22 +3,22 @@
  *
  *  version:  major, minor, patch
  */
-#define MULLE_REGEX_VERSION  ((0 << 20) | (7 << 8) | 57)
+#define MULLE__REGEX_VERSION  ((0UL << 20) | (0 << 8) | 1)
 
 
 static inline unsigned int   mulle_regex_get_version_major( void)
 {
-   return( MULLE_REGEX_VERSION >> 20);
+   return( MULLE__REGEX_VERSION >> 20);
 }
 
 
 static inline unsigned int   mulle_regex_get_version_minor( void)
 {
-   return( (MULLE_REGEX_VERSION >> 8) & 0xFFF);
+   return( (MULLE__REGEX_VERSION >> 8) & 0xFFF);
 }
 
 
 static inline unsigned int   mulle_regex_get_version_patch( void)
 {
-   return( MULLE_REGEX_VERSION & 0xFF);
+   return( MULLE__REGEX_VERSION & 0xFF);
 }

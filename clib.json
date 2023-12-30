@@ -1,9 +1,9 @@
 {
    "name" : "mulle-regex",
-   "version" : "0.7.57",
-   "description" : "> This is a unicode interpretation of the Henry Spencer regexp",
+   "version" : "0.0.1",
+   "description" : "📣 Unicode regex library",
    "keywords" : [],
-   "license" : "UNLICENSED",
+   "license" : "Custom",
    "repo" : "mulle-c/mulle-regex",
    "src" : [
       "src/generic/include-private.h",

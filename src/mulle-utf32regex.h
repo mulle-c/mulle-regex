@@ -32,11 +32,17 @@ int   mulle_utf32regex_execute( struct mulle_utf32regex *regex,
                                 mulle_utf32_t *src);
 
 /* returns < 0 on failure, 0 otherwise
+   mulle_utf32regex_substitute, does not truncate. If the output buffer is too
+   small, its an error.
+   Does not append a trailing zero, unless specified by `zero`. `dst_len` must
+   then be + 1
  */
 int   mulle_utf32regex_substitute( struct mulle_utf32regex *regex,
                                    mulle_utf32_t *replacement,
                                    mulle_utf32_t *dst,
-                                   size_t dst_len);
+                                   unsigned int dst_len,
+                                   int zero);
+
 
 
 // returns malloced buffer, or NULL
@@ -52,16 +58,23 @@ mulle_utf32_t   *mulle_utf32_substitute( mulle_utf32_t *pattern,
                                          mulle_utf32_t *src);
 
 // Length of the string that will be substituted in the matched part of the
-// string. You need to add the front and back part yourself.
+// string. This does _not_ include the trailing zero, that
+// mulle_utf32_substitute will add! See mulle_utf32regex_substitution_buffer_size
+// for the space you should malloc. Will return (unsigned int) -1 on error.
+//
+// You need to add the front and back part yourself.
 unsigned int   mulle_utf32regex_substitution_length( struct mulle_utf32regex *regex,
                                                      mulle_utf32_t *replacement);
 
-// len in bytes(!)
+// number of bytes(!) needed for the substitution buffer
 static inline size_t
    mulle_utf32regex_substitution_buffer_size( struct mulle_utf32regex *regex,
                                               mulle_utf32_t *replacement)
 {
-   return( mulle_utf32regex_substitution_length( regex, replacement) * sizeof( mulle_utf32_t));
+   unsigned int   length;
+
+   length = mulle_utf32regex_substitution_length( regex, replacement);
+   return( (length + 1) * sizeof( mulle_utf32_t));
 }
 
 
