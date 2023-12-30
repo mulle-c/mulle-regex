@@ -1,7 +1,3 @@
-### 0.7.57
+### 0.0.1
 
-* Various small improvements
-
-### 0.7.56
-
-* Various small improvements
+* Mercyful Release

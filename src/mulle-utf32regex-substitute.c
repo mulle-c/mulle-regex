@@ -48,13 +48,14 @@ static int  octal( mulle_utf32_t **src_p)
 int   mulle_utf32regex_substitute( struct mulle_utf32regex *rp,
                                    mulle_utf32_t *src,
                                    mulle_utf32_t *dst,
-                                   size_t dst_len)
+                                   unsigned int dst_len,
+                                   int zero)
 {
    regexp          *prog = (regexp *) rp;
    mulle_utf32_t   c;
    mulle_utf32_t   d;
    int             no;
-   size_t          len;
+   unsigned int    len;
    mulle_utf32_t   *dst_sentinel;
 
    assert( prog);
@@ -73,7 +74,8 @@ int   mulle_utf32regex_substitute( struct mulle_utf32regex *rp,
       c = *src++;
       if( ! c)
       {
-         *dst = 0;
+         if( zero)
+            *dst = 0;
          return( 0);
       }
 
@@ -138,8 +140,13 @@ int   mulle_utf32regex_substitute( struct mulle_utf32regex *rp,
       }
    }
 
-   errno = E2BIG;
-   return( -E2BIG);
+   // if src is empty and we have no zero to append this is fine otherwise
+   if( zero || *src)
+   {
+      errno = E2BIG;
+      return( -E2BIG);
+   }
+   return( 0);
 }
 
 
@@ -157,7 +164,7 @@ unsigned int   mulle_utf32regex_substitution_length( struct mulle_utf32regex *rp
    assert( src);
    assert( *((mulle_utf32_t *) prog->program) == MAGIC);
 
-   dst_len = 1;  /* space for trailing 0 */
+   dst_len = 0;
    for(;;)
    {
       c = *src++;
@@ -166,7 +173,7 @@ unsigned int   mulle_utf32regex_substitution_length( struct mulle_utf32regex *rp
          if( (unsigned int) dst_len != dst_len)
          {
             errno = E2BIG;
-            return( 0);
+            return( -1);
          }
          return( dst_len);
       }
@@ -178,7 +185,7 @@ unsigned int   mulle_utf32regex_substitution_length( struct mulle_utf32regex *rp
       case '\\' : d = *src++;
                   switch( d)
                   {
-                  case 0   : return( 0);
+                  case 0   : errno = EINVAL; return( (unsigned int) -1);
                   default  : dst_len++;
                              continue;
 
@@ -217,5 +224,5 @@ unsigned int   mulle_utf32regex_substitution_length( struct mulle_utf32regex *rp
       len      = (size_t) (prog->endp[ no] - prog->startp[ no]);
       dst_len += len;
    }
-   return( 0);
+   return( (unsigned int) -1);
 }

@@ -72,3 +72,4 @@ coverage*.html
 *.gcda
 *.gcno
 *-preview-*.html
+cola/wilted/

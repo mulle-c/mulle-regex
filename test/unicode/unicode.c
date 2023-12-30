@@ -26,8 +26,8 @@ static int   _test( struct mulle_utf32regex  *r,
    }
 
    dst_length = mulle_utf32regex_substitution_length( r, replace);
-   buf        = mulle_malloc( sizeof( mulle_utf32_t) * dst_length);
-   result     = mulle_utf32regex_substitute( r, replace, buf, dst_length);
+   buf        = mulle_malloc( sizeof( mulle_utf32_t) * (dst_length + 1));
+   result     = mulle_utf32regex_substitute( r, replace, buf, dst_length + 1, 1);
    if( result < 0)
    {
       mulle_printf( "substitution fail\n");

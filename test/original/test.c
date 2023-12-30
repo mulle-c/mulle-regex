@@ -81,7 +81,7 @@ static void   try( char *fields[ 5], int lineno)
 
 
    expected_failure = ! strcmp( "@", fields[ 4]);
-   result = mulle_utf32regex_substitute( r, replacement, dbuf, BUFSIZ);
+   result = mulle_utf32regex_substitute( r, replacement, dbuf, BUFSIZ, 1);
 
    if( result == 0)
       printf( "%s match",  ! mulle_utf32_strcmp( expect, dbuf) ? "" : "no ");
