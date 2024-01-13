@@ -7,14 +7,17 @@
       user="mulle-c";
       repo="mulle-regex";
       homepage="https://github.com/mulle-c/mulle-regex";
-      license="Custom"
+      license="Henry Spencer Reg-Ex Library License";
    };
    dependencies =
    (
       {
-         name="mulle-utf";
-         url="https://github.com/mulle-c/mulle-utf";
          description="🔤 UTF8-16-32 analysis and manipulation library";
+         domain="github";
+         name="mulle-utf";
+         repo="mulle-utf";
+         url="https://github.com/mulle-c/mulle-utf";
+         user="mulle-c";
       }
-   )
+   );
 }
