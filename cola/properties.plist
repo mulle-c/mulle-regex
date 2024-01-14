@@ -7,7 +7,7 @@
       user="mulle-c";
       repo="mulle-regex";
       homepage="https://github.com/mulle-c/mulle-regex";
-      license="Henry Spencer Reg-Ex Library License";
+      license="UNLICENSED";
    };
    dependencies =
    (
