@@ -1,9 +1,9 @@
 {
    "name" : "mulle-regex",
-   "version" : "0.0.1",
+   "version" : "0.0.2",
    "description" : "📣 Unicode regex library",
    "keywords" : [],
-   "license" : "Custom",
+   "license" : "UNLICENSED",
    "repo" : "mulle-c/mulle-regex",
    "src" : [
       "src/generic/include-private.h",
