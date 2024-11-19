@@ -1,6 +1,6 @@
 {
    "name" : "mulle-regex",
-   "version" : "0.0.2",
+   "version" : "0.0.3",
    "description" : "📣 Unicode regex library",
    "keywords" : [],
    "license" : "UNLICENSED",
