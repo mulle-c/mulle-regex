@@ -1,3 +1,9 @@
+### 0.0.3
+
+
+
+* proper prototype for a function, decreases warnings
+
 ### 0.0.2
 
 * prefixed some #defeines for less clash chance
