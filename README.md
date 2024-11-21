@@ -29,7 +29,7 @@ to protect against overflows. There are a few added convenience methods.
 
 | Release Version                                       | Release Notes
 |-------------------------------------------------------|--------------
-| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-regex.svg?branch=release) [![Build Status](https://github.com/mulle-c/mulle-regex/workflows/CI/badge.svg?branch=release)](//github.com/mulle-c/mulle-regex/actions) | [RELEASENOTES](RELEASENOTES.md) |
+| ![Mulle kybernetiK tag](https://img.shields.io/github/tag/mulle-c/mulle-regex.svg?branch=master) [![Build Status](https://github.com/mulle-c/mulle-regex/workflows/CI/badge.svg?branch=master)](//github.com/mulle-c/mulle-regex/actions) | [RELEASENOTES](RELEASENOTES.md) |
 
 
 
