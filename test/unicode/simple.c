@@ -10,7 +10,7 @@ static int   _test( struct mulle_utf32regex  *r,
 {
    int                  result;
    mulle_utf32_t        *buf;
-   unsigned int         dst_length;
+   size_t               dst_length;
    struct mulle_range   fixRanges[ 2];
    struct mulle_range   range;
 
