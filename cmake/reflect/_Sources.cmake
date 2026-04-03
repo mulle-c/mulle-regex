@@ -14,10 +14,3 @@ set( SOURCES
 src/mulle-utf32regex.c
 src/mulle-utf32regex-substitute.c
 )
-
-#
-# contents selected with patternfile ??-source--standalone-sources
-#
-set( STANDALONE_SOURCES
-src/mulle-regex-standalone.c
-)

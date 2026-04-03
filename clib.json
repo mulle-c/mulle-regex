@@ -1,14 +1,14 @@
 {
    "name" : "mulle-regex",
-   "version" : "0.0.5",
+   "version" : "20",
    "description" : "📣 Unicode regex library",
    "keywords" : [],
    "license" : "UNLICENSED",
    "repo" : "mulle-c/mulle-regex",
    "src" : [
+      "asset/dox/TOC.md",
       "src/generic/include-private.h",
       "src/generic/include.h",
-      "src/mulle-regex-standalone.c",
       "src/mulle-regex.h",
       "src/mulle-utf32regex-private.h",
       "src/mulle-utf32regex-substitute.c",

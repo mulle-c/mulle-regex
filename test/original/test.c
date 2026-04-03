@@ -17,6 +17,7 @@
 #include <mulle-buffer/mulle-buffer.h>
 #include <mulle-fprintf/mulle-fprintf.h>
 #include <stdio.h>
+#include <string.h>
 
 
 static void   try( char *fields[ 5], int lineno)
@@ -53,7 +54,7 @@ static void   try( char *fields[ 5], int lineno)
    replacement = mulle_buffer_get_bytes( &replacement_buffer);
    expect      = mulle_buffer_get_bytes( &expect_buffer);
 
-   mulle_printf( "\n%d: %lS %lS %s %lS %lS: ", lineno, pattern, input, fields[ 2], replacement, expect);
+   mulle_printf( "\n%d: %S %S %s %S %S: ", lineno, pattern, input, fields[ 2], replacement, expect);
 
    r                = mulle_utf32regex_compile( pattern);
    expected_success = r != NULL && *fields[2] != 'c';
@@ -106,7 +107,6 @@ static void   multiple( FILE *fp)
    int i;
    int lineno;
 //   regexp *r;
-   extern char *strchr();
 
    lineno = 0;
    while (fgets(rbuf, sizeof(rbuf), fp) != NULL) {
