@@ -35,7 +35,7 @@ static int   _test( struct mulle_utf32regex  *r,
       return( 1);
    }
 
-   mulle_printf( "%lS\n", buf);
+   mulle_printf( "%S\n", buf);
    mulle_free( buf);
    return( 0);
 }
@@ -46,7 +46,7 @@ static int   test( mulle_utf32_t *s, mulle_utf32_t *pattern, mulle_utf32_t *repl
    struct mulle_utf32regex   *r;
    int                       rc;
 
-   mulle_printf( "%lS/%lS/%lS: ", s, pattern, replace);
+   mulle_printf( "%S/%S/%S: ", s, pattern, replace);
 
    r = mulle_utf32regex_compile( pattern);
    if( ! r)

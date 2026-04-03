@@ -82,3 +82,6 @@ test*/**/*.test.*
 !/AGENTS.md
 !/README.md
 build-*/
+.kiro/settings/lsp.json
+.roam
+.graveyard

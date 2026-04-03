@@ -39,7 +39,7 @@ static int   _test( struct mulle_utf32regex  *r,
 
    range = mulle_utf32regex_range_for_index( r, 0);
    mulle_range_subtract( mulle_range_make( 0, mulle_utf32_strlen( s)), range, fixRanges);
-   mulle_printf( "%.*lS%lS%.*lS\n",
+   mulle_printf( "%.*S%S%.*S\n",
                      (int) fixRanges[ 0].length, &s[ fixRanges[ 0].location],
                      buf,
                      (int) fixRanges[ 1].length, &s[ fixRanges[ 1].location]);
@@ -53,7 +53,7 @@ static int   test( mulle_utf32_t *s, mulle_utf32_t *pattern, mulle_utf32_t *repl
    struct mulle_utf32regex   *r;
    int                       rc;
 
-   mulle_printf( "%lS | %lS -> %lS: ", s, pattern, replace);
+   mulle_printf( "%S | %S -> %S: ", s, pattern, replace);
 
    r = mulle_utf32regex_compile( pattern);
    if( ! r)

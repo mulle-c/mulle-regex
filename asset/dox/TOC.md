@@ -1,4 +1,5 @@
 # mulle-regex Library Documentation for AI
+<!-- Keywords: regex, unicode -->
 
 ## 1. Introduction & Purpose
 
