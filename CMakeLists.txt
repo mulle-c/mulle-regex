@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.13...99.99)
 
-project( mulle-regex VERSION 0.0.5 LANGUAGES C)
+project( mulle-regex VERSION 0.1.0 LANGUAGES C)
 
 
 
