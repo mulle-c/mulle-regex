@@ -6,7 +6,7 @@
    "license" : "UNLICENSED",
    "repo" : "mulle-c/mulle-regex",
    "src" : [
-      "asset/dox/TOC.md",
+      "asset/dox/api/toc/index.md",
       "src/generic/include-private.h",
       "src/generic/include.h",
       "src/mulle-regex.h",
