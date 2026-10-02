@@ -27,7 +27,7 @@ else()
 endif()
 
 #
-# Generated from sourcetree: DA632302-CC77-41E3-A7C2-16F226549339;mulle-utf;no-all-load,no-cmake-searchpath,no-import,no-singlephase;
+# Generated from sourcetree: DA632302-CC77-41E3-A7C2-16F226549339;mulle-utf;no-all-load,no-cmake-loader,no-cmake-searchpath,no-import,no-singlephase;
 # Disable with : `mulle-sourcetree mark mulle-utf no-link`
 # Disable for this platform: `mulle-sourcetree mark mulle-utf no-cmake-platform-${MULLE_UNAME}`
 # Disable for a sdk: `mulle-sourcetree mark mulle-utf no-cmake-sdk-<name>`
@@ -120,5 +120,103 @@ ${MULLE_PREFERRED_LIBRARY_PREFIX}mulle-utf${MULLE_PREFERRED_LIBRARY_SUFFIX}
 ${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-utf${CMAKE_DEBUG_POSTFIX}${MULLE_FALLBACK_LIBRARY_SUFFIX}
 ${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-utf${MULLE_FALLBACK_LIBRARY_SUFFIX}
 mulle-utf")
+   endif()
+endif()
+
+
+#
+# Generated from sourcetree: 2E69644F-DC65-4783-9A79-4E9D9C3C2A11;mulle-unicode;no-all-load,no-cmake-loader,no-cmake-searchpath,no-import,no-singlephase;
+# Disable with : `mulle-sourcetree mark mulle-unicode no-link`
+# Disable for this platform: `mulle-sourcetree mark mulle-unicode no-cmake-platform-${MULLE_UNAME}`
+# Disable for a sdk: `mulle-sourcetree mark mulle-unicode no-cmake-sdk-<name>`
+#
+if( COLLECT_DEPENDENCY_LIBRARIES_AS_NAMES)
+   list( APPEND DEPENDENCY_LIBRARIES "mulle-unicode")
+else()
+   if( NOT MULLE__UNICODE_LIBRARY)
+      foreach( _TMP_MULLE__UNICODE_LIBRARY_TARGET mulle-unicode)
+         if( TARGET ${_TMP_MULLE__UNICODE_LIBRARY_TARGET})
+            set( MULLE__UNICODE_LIBRARY ${_TMP_MULLE__UNICODE_LIBRARY_TARGET})
+            break()
+         endif()
+      endforeach()
+      if( NOT MULLE__UNICODE_LIBRARY)
+         find_library( MULLE__UNICODE_LIBRARY NAMES
+            ${MULLE_PREFERRED_LIBRARY_PREFIX}mulle-unicode${CMAKE_DEBUG_POSTFIX}${MULLE_PREFERRED_LIBRARY_SUFFIX}
+            ${MULLE_PREFERRED_LIBRARY_PREFIX}mulle-unicode${MULLE_PREFERRED_LIBRARY_SUFFIX}
+            ${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-unicode${CMAKE_DEBUG_POSTFIX}${MULLE_FALLBACK_LIBRARY_SUFFIX}
+            ${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-unicode${MULLE_FALLBACK_LIBRARY_SUFFIX}
+            mulle-unicode
+            NO_CMAKE_SYSTEM_PATH NO_SYSTEM_ENVIRONMENT_PATH NO_CMAKE_FIND_ROOT_PATH
+         )
+         if( NOT MULLE__UNICODE_LIBRARY AND NOT DEPENDENCY_IGNORE_SYSTEM_LIBRARIES)
+            find_library( MULLE__UNICODE_LIBRARY NAMES
+               ${MULLE_PREFERRED_LIBRARY_PREFIX}mulle-unicode${CMAKE_DEBUG_POSTFIX}${MULLE_PREFERRED_LIBRARY_SUFFIX}
+               ${MULLE_PREFERRED_LIBRARY_PREFIX}mulle-unicode${MULLE_PREFERRED_LIBRARY_SUFFIX}
+               ${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-unicode${CMAKE_DEBUG_POSTFIX}${MULLE_FALLBACK_LIBRARY_SUFFIX}
+               ${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-unicode${MULLE_FALLBACK_LIBRARY_SUFFIX}
+               mulle-unicode
+            )
+         endif()
+      endif()
+      message( STATUS "MULLE__UNICODE_LIBRARY is ${MULLE__UNICODE_LIBRARY}")
+   endif()
+   if( MULLE__UNICODE_LIBRARY)
+         #
+         # Add MULLE__UNICODE_LIBRARY to DEPENDENCY_LIBRARIES list.
+         # Disable with: `mulle-sourcetree mark mulle-unicode no-cmake-add`
+         #
+         if( NOT ${MULLE__UNICODE_LIBRARY} IN_LIST DEPENDENCY_LIBRARIES)
+            list( APPEND DEPENDENCY_LIBRARIES ${MULLE__UNICODE_LIBRARY})
+         endif()
+         #
+         # Inherit information from dependency.
+         # Encompasses: no-cmake-searchpath,no-cmake-dependency,no-cmake-loader
+         # Disable with: `mulle-sourcetree mark mulle-unicode no-cmake-inherit`
+         #
+         # temporarily expand CMAKE_MODULE_PATH
+         get_filename_component( _TMP_MULLE__UNICODE_ROOT "${MULLE__UNICODE_LIBRARY}" DIRECTORY)
+         get_filename_component( _TMP_MULLE__UNICODE_ROOT "${_TMP_MULLE__UNICODE_ROOT}" DIRECTORY)
+         #
+         #
+         # Search for "Definitions.cmake" and "DependenciesAndLibraries.cmake" to include.
+         # Disable with: `mulle-sourcetree mark mulle-unicode no-cmake-dependency`
+         #
+         foreach( _TMP_MULLE__UNICODE_NAME "mulle-unicode")
+            set( _TMP_MULLE__UNICODE_DIR "${_TMP_MULLE__UNICODE_ROOT}/include/${_TMP_MULLE__UNICODE_NAME}/cmake")
+            # use explicit path to avoid "surprises"
+            if( IS_DIRECTORY "${_TMP_MULLE__UNICODE_DIR}")
+               list( INSERT CMAKE_MODULE_PATH 0 "${_TMP_MULLE__UNICODE_DIR}")
+               # we only want top level INHERIT_OBJC_DEPS, so disable them
+               if( NOT NO_INHERIT_OBJC_DEPS)
+                  set( NO_INHERIT_OBJC_DEPS OFF)
+               endif()
+               list( APPEND _TMP_INHERIT_OBJC_DEPS ${NO_INHERIT_OBJC_DEPS})
+               set( NO_INHERIT_OBJC_DEPS ON)
+               #
+               include( "${_TMP_MULLE__UNICODE_DIR}/DependenciesAndLibraries.cmake" OPTIONAL)
+               #
+               list( GET _TMP_INHERIT_OBJC_DEPS -1 NO_INHERIT_OBJC_DEPS)
+               list( REMOVE_AT _TMP_INHERIT_OBJC_DEPS -1)
+               list( REMOVE_ITEM CMAKE_MODULE_PATH "${_TMP_MULLE__UNICODE_DIR}")
+               #
+               unset( MULLE__UNICODE_DEFINITIONS)
+               unset( MULLE__UNICODE_RENDEZVOUS_GLOBALS)
+               include( "${_TMP_MULLE__UNICODE_DIR}/Definitions.cmake" OPTIONAL)
+               list( APPEND INHERITED_DEFINITIONS ${MULLE__UNICODE_DEFINITIONS})
+               include( "${_TMP_MULLE__UNICODE_DIR}/Definitions.cmake" OPTIONAL)
+               list( APPEND RENDEZVOUS_GLOBALS ${MULLE__UNICODE_RENDEZVOUS_GLOBALS})
+               break()
+            else()
+               message( STATUS "${_TMP_MULLE__UNICODE_DIR} not found")
+            endif()
+         endforeach()
+   else()
+      # Disable with: `mulle-sourcetree mark mulle-unicode no-require-link`
+      message( SEND_ERROR "MULLE__UNICODE_LIBRARY was not found in ${MULLE_PREFERRED_LIBRARY_PREFIX}mulle-unicode${CMAKE_DEBUG_POSTFIX}${MULLE_PREFERRED_LIBRARY_SUFFIX}
+${MULLE_PREFERRED_LIBRARY_PREFIX}mulle-unicode${MULLE_PREFERRED_LIBRARY_SUFFIX}
+${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-unicode${CMAKE_DEBUG_POSTFIX}${MULLE_FALLBACK_LIBRARY_SUFFIX}
+${MULLE_FALLBACK_LIBRARY_PREFIX}mulle-unicode${MULLE_FALLBACK_LIBRARY_SUFFIX}
+mulle-unicode")
    endif()
 endif()

@@ -31,7 +31,6 @@ static void   try( char *fields[ 5], int lineno)
    mulle_utf32_t                  *pattern;
    mulle_utf32_t                  *input;
    mulle_utf32_t                  *expect;
-   struct mulle_utf_information   info;
    struct mulle_buffer            pattern_buffer     = MULLE_BUFFER_DATA( NULL);
    struct mulle_buffer            input_buffer       = MULLE_BUFFER_DATA( NULL);
    struct mulle_buffer            replacement_buffer = MULLE_BUFFER_DATA( NULL);

@@ -1,6 +1,6 @@
 {
    "name" : "mulle-regex",
-   "version" : "0.1.2",
+   "version" : "0.2.0",
    "description" : "📣 Unicode regex library",
    "keywords" : [],
    "license" : "UNLICENSED",
@@ -21,6 +21,7 @@
       "src/version.h"
    ],
    "dependencies" : {
-      "mulle-c/mulle-utf": "*"
+      "mulle-c/mulle-utf": "*",
+      "mulle-c/mulle-unicode": "*"
    }
 }
