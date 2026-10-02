@@ -78,19 +78,16 @@ jobs:
     - name: Mulle-SDE Fetch
       run: mulle-sde fetch
 
-    - name: Mulle-SDE Test Craft (ASAN + UBSAN)
+    - name: Mulle-SDE Craft (ASAN + UBSAN)
       run: |
-        [ ! -d test ] || mulle-sde \
-          -DCFLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer" \
-          -DLDFLAGS="-fsanitize=address,undefined" \
-          test --sanitize-address --sanitize-undefined craft
+        mulle-sde craft --debug \
+          -DCMAKE_C_FLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer" \
+          -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=address,undefined" \
+          -DCMAKE_SHARED_LINKER_FLAGS="-fsanitize=address,undefined"
 
-    - name: Mulle-SDE Test Run (ASAN + UBSAN)
+    - name: Mulle-SDE Test (ASAN + UBSAN)
       run: |
-        [ ! -d test ] || mulle-sde \
-          -DCFLAGS="-fsanitize=address,undefined -fno-omit-frame-pointer" \
-          -DLDFLAGS="-fsanitize=address,undefined" \
-          test --sanitize-address --sanitize-undefined run
+        [ ! -d test ] || mulle-sde test
       env:
         ASAN_OPTIONS: "detect_leaks=0:abort_on_error=1"
         UBSAN_OPTIONS: "print_stacktrace=1:halt_on_error=1"
@@ -117,19 +114,16 @@ jobs:
     - name: Mulle-SDE Fetch
       run: mulle-sde fetch
 
-    - name: Mulle-SDE Test Craft (32-bit)
+    - name: Mulle-SDE Craft (32-bit)
       run: |
-        [ ! -d test ] || mulle-sde \
-          -DCFLAGS="-m32" \
-          -DLDFLAGS="-m32" \
-          test --configuration release craft
+        mulle-sde craft --release \
+          -DCMAKE_C_FLAGS="-m32" \
+          -DCMAKE_EXE_LINKER_FLAGS="-m32" \
+          -DCMAKE_SHARED_LINKER_FLAGS="-m32"
 
-    - name: Mulle-SDE Test Run (32-bit)
+    - name: Mulle-SDE Test (32-bit)
       run: |
-        [ ! -d test ] || mulle-sde \
-          -DCFLAGS="-m32" \
-          -DLDFLAGS="-m32" \
-          test --configuration release run
+        [ ! -d test ] || mulle-sde test
 
   valgrind:
     if: vars.CI_SKIP_VALGRIND != 'true'

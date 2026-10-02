@@ -91,3 +91,11 @@ build-*/
 .kiro/
 TODO.md
 REVIEW.md
+.ackrc
+.vscode/
+.touch
+*.orig
+*.workspace
+*.*-workspace
+research/
+*.old
