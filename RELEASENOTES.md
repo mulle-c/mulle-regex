@@ -1,6 +1,7 @@
 ## 0.2.0
 
 
+
 * Document ``mulle_utf32regex_compile_options(` pattern, options)` and the ``MULLE_UTF32REGEX_EXTENDED`` (0x0001) option, which enables escapes and named character classes such as `[[:alpha:]]` and `[[:space:]]`.
 * Document that ``mulle_utf32regex_range_for_index`` returns an invalid range for non-participating capture groups and out-of-range indices, to be checked via ``mulle_range_is_valid()`.`
 * Note the new mulle-unicode dependency used to resolve named character classes.
